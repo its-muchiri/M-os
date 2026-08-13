@@ -1,0 +1,65 @@
+# Environment variables
+.env
+.env.*
+
+# Client data (sensitive - should not be in public repos)
+knowledge/02 Clients/**
+
+# Python
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+*.egg-info/
+dist/
+build/
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Docker
+docker-compose.override.yml
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Backups (may contain sensitive data)
+backups/*.zip
+backups/*.sql
+backups/*.dump
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+tmp/
+*.log
+
+# Ollama models (large files)
+models/
+
+# n8n
+n8n_data/
+
+# Queued social posts (may contain unpublished content)
+automation/post_queue/
+
+# Obsidian vault specific
+*.recent
+*.backup
