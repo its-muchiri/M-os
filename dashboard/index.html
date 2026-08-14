@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Muchiri-OS Dashboard</title>
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --bg-card: #12121a;
+      --fg: #e8e8f0;
+      --muted: #6b6b80;
+      --accent: #00d4aa;
+      --accent-dim: rgba(0, 212, 170, 0.15);
+      --border: #2a2a3a;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .header {
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 20px;
+      margin-bottom: 20px;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    @media (min-width: 640px) {
+      .grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (min-width: 1024px) {
+      .grid { grid-template-columns: 1fr 1fr 1fr; }
+    }
+
+    h1, h2, h3 {
+      color: var(--fg);
+      margin-top: 0;
+    }
+
+    h1 { font-size: 2rem; margin-bottom: 10px; }
+    h2 { font-size: 1.5rem; margin-bottom: 8px; }
+    h3 { font-size: 1.25rem; }
+
+    .btn {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--bg);
+      padding: 8px 16px;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: opacity 0.2s;
+    }
+
+    .btn:hover { opacity: 0.9; }
+
+    .tag {
+      display: inline-block;
+      background: var(--accent-dim);
+      color: var(--accent);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      margin-right: 4px;
+      margin-bottom: 4px;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .file-path {
+      background: var(--bg);
+      color: var(--muted);
+      padding: 8px;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      word-break: break-all;
+      margin-top: 8px;
+    }
+
+    .version {
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <h1>Muchiri-OS Dashboard</h1>
+      <p class="version">Local-first AI-powered operating system</p>
+    </header>
+
+    <div class="grid">
+      <!-- Today's Priorities -->
+      <div class="card">
+        <h2>Today's Priorities</h2>
+        <ul>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <span>Review Muchiri-OS dashboard in Obsidian</span>
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <span>Process inbox items from 00-Inbox/</span>
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <span>Update project status in 06-Projects/Active</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Active Projects -->
+      <div class="card">
+        <h2>Active Projects</h2>
+        <p>View active projects in the Muchiri-OS Obsidian vault:</p>
+        <ul>
+          <li>Project Alpha - Website Redesign</li>
+          <li>Project Beta - SEO Audit</li>
+          <li>Project Gamma - Automation Workflow</li>
+        </ul>
+      </div>
+
+      <!-- Active Clients -->
+      <div class="card">
+        <h2>Active Clients</h2>
+        <p>Clients currently in the vault:</p>
+        <ul>
+          <li>Acme Corp (Software)</li>
+          <li>TechStart Inc (SaaS)</li>
+          <li>MetaMarketing (E-commerce)</li>
+        </ul>
+      </div>
+
+      <!-- AI Agents -->
+      <div class="card">
+        <h2>AI Agents</h2>
+        <p>7 specialized agents active:</p>
+        <ul>
+          <li>Research Agent - Discovery & knowledge management</li>
+          <li>SEO Agent - Keyword research, audits, briefs</li>
+          <li>Content Agent - Blog, social, website copy</li>
+          <li>Developer Agent - Websites, APIs, documentation</li>
+          <li>Marketing Agent - Campaigns, positioning, personas</li>
+          <li>Project Manager Agent - Planning, tasks, priorities</li>
+          <li>Automation Agent - Scripts, workflows, integrations</li>
+        </ul>
+      </div>
+
+      <!-- Vault Status -->
+      <div class="card">
+        <h2>Vault Status</h2>
+        <p>Muchiri-OS vault location:</p>
+        <div class="file-path" id="vault-path">C:\\Users\\KIMISH\\Desktop\\M-os</div>
+        <p class="version">96 markdown files • 7 agents • Git tracked</p>
+        <a href="https://github.com/its-muchiri/M-os" target="_blank" class="btn">View on GitHub</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Quick Actions</h2>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px;">
+        <a href="obsidian://open?vault=M-os&file=DASHBOARD.md" class="btn">Open in Obsidian</a>
+        <a href="https://github.com/its-muchiri/M-os" target="_blank" class="btn">GitHub Repo</a>
+        <a href="#"
+           onclick="alert('See Obsidian vault for full functionality')"
+           class="btn">Learn More</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

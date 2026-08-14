@@ -1,0 +1,21 @@
+{
+  "name": "muchiri-os-dashboard",
+  "version": "1.0.0",
+  "description": "Local-first dashboard for Muchiri-OS",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "engines": {
+    "node": ">=18"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/its-muchiri/M-os.git",
+    "directory": "dashboard"
+  },
+  "license": "MIT",
+  "private": true
+}
