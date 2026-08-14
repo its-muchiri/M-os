@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Muchiri-OS Mind Map Dashboard</title>
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --bg-card: #12121a;
+      --fg: #e8e8f0;
+      --muted: #6b6b80;
+      --accent: #00d4aa;
+      --accent-dim: rgba(0, 212, 170, 0.15);
+      --border: #2a2a3a;
+      --agent-1: #ff6b6b;
+      --agent-2: #f7931c;
+      --agent-3: #00d4aa;
+      --agent-4: #5e72e4;
+      --agent-5: #8e52e5;
+      --agent-6: #43b581;
+      --agent-7: #f86770;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      overflow: hidden;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header {
+      padding: 16px 24px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .header h1 {
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+
+    .header-controls {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .btn {
+      background: var(--accent);
+      color: var(--bg);
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    .btn:hover { opacity: 0.9; }
+    .btn-secondary {
+      background: var(--bg-card);
+      color: var(--fg);
+      border: 1px solid var(--border);
+    }
+
+    .zoom-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .zoom-btn {
+      width: 32px;
+      height: 32px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--fg);
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+
+    .graph-container {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+      background: radial-gradient(circle at 50% 50%, rgba(0, 212, 170, 0.03) 0%, transparent 70%);
+    }
+
+    #graph {
+      width: 100%;
+      height: 100%;
+      cursor: grab;
+    }
+
+    #graph.dragging {
+      cursor: grabbing;
+    }
+
+    .node {
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .nodecircle {
+      stroke-width: 2;
+      filter: url(#glow);
+    }
+
+    .node-text {
+      font-size: 12px;
+      font-weight: 500;
+      pointer-events: none;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+    }
+
+    .node-label {
+      font-size: 10px;
+      fill: var(--muted);
+      pointer-events: none;
+    }
+
+    .link {
+      stroke: var(--border);
+      stroke-width: 1.5;
+      fill: none;
+    }
+
+    .link-active {
+      stroke: var(--accent);
+      stroke-width: 2.5;
+    }
+
+    .link-label {
+      font-size: 9px;
+      fill: var(--muted);
+      pointer-events: none;
+    }
+
+    .sidebar {
+      position: fixed;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 320px;
+      background: var(--bg-card);
+      border-left: 1px solid var(--border);
+      padding: 24px;
+      overflow-y: auto;
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+      z-index: 10;
+    }
+
+    .sidebar.open {
+      transform: translateX(0);
+    }
+
+    .close-sidebar {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .sidebar h2 {
+      font-size: 1.25rem;
+      margin-bottom: 12px;
+      padding-right: 24px;
+    }
+
+    .sidebar .content {
+      margin-top: 16px;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .sidebar li {
+      margin-bottom: 12px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .sidebar li:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .tag {
+      display: inline-block;
+      background: var(--accent-dim);
+      color: var(--accent);
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 0.7rem;
+      margin-right: 6px;
+      margin-bottom: 4px;
+    }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+    }
+
+    .legend-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <h1>Muchiri-OS Mind Map</h1>
+    <div class="header-controls">
+      <button class="btn-secondary" id="reset-view">Fit to Screen</button>
+      <div class="zoom-controls">
+        <button class="zoom-btn" id="zoom-out">−</button>
+        <span id="zoom-level">100%</span>
+        <button class="zoom-btn" id="zoom-in">+</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="graph-container">
+    <svg id="graph"></svg>
+  </div>
+
+  <aside class="sidebar" id="sidebar">
+    <button class="close-sidebar" id="close-sidebar">×</button>
+    <div id="sidebar-content"></div>
+  </aside>
+
+  <defs>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script>
+    // Mind map data structure based on SYSTEM-MAP.md and AGENTS.md
+    const mindMapData = {
+      nodes: [
+        // Core Components (level 0)
+        { id: "user", name: "You (User)", type: "core", description: "Human operator interacting with the system", size: 24, color: "#00d4aa" },
+        { id: "obsidian", name: "Obsidian", type: "tool", description: "Knowledge interface layer — read, write, review notes", size: 20, color: "#5e72e4" },
+
+        // Knowledge Layer (level 1)
+        { id: "vault", name: "Vault (M-os)", type: "data", description: "Markdown knowledge base with YAML frontmatter", size: 22, color: "#f7931c" },
+        { id: "git", name: "Git", type: "tool", description: "Version control for vault and code repositories", size: 18, color: "#ff6b6b" },
+
+        // 12 Vault Directories (level 2 - children of vault)
+        { id: "inbox", name: "00-Inbox", type: "folder", description: "Capture zone — process regularly", size: 14, color: "#8e52e5" },
+        { id: "agency", name: "01-Agency", type: "folder", description: "Identity, strategy, SOPs, policies, templates", size: 14, color: "#8e52e5" },
+        { id: "clients", name: "02-Clients", type: "folder", description: "Active / Leads / Completed / Templates", size: 14, color: "#8e52e5" },
+        { id: "marketing", name: "03-Marketing", type: "folder", description: "Strategy, Campaigns, Content, SEO, Social, Analytics", size: 14, color: "#8e52e5" },
+        { id: "development", name: "04-Development", type: "folder", description: "Websites, Apps, APIs, Automation, DevOps, Docs", size: 14, color: "#8e52e5" },
+        { id: "knowledge", name: "05-Knowledge", type: "folder", description: "Long-term knowledge base (AI, Marketing, SEO, ...)", size: 14, color: "#8e52e5" },
+        { id: "projects", name: "06-Projects", type: "folder", description: "Active / Planned / Completed project folders", size: 14, color: "#8e52e5" },
+        { id: "agents", name: "07-AI-Agents", type: "folder", description: "Agent definitions and workspaces", size: 14, color: "#8e52e5" },
+        { id: "tasks", name: "08-Tasks", type: "folder", description: "Today / This-Week / Backlog / Completed", size: 14, color: "#8e52e5" },
+        { id: "meetings", name: "09-Meetings", type: "folder", description: "Meeting notes", size: 14, color: "#8e52e5" },
+        { id: "resources", name: "10-Resources", type: "folder", description: "Links, Tools, References, Documents", size: 14, color: "#8e52e5" },
+        { id: "archive", name: "11-Archive", type: "folder", description: "Finished / superseded material", size: 14, color: "#8e52e5" },
+
+        // Key Documents (children of agency/vault root)
+        { id: "agents-md", name: "AGENTS.md", type: "doc", description: "Operating constitution for OpenCode", size: 14, color: "#43b581" },
+        { id: "dashboard-md", name: "DASHBOARD.md", type: "doc", description: "Command center — priorities, projects, clients", size: 14, color: "#43b581" },
+        { id: "system-map", name: "SYSTEM-MAP.md", type: "doc", description: "How everything connects", size: 14, color: "#43b581" },
+        { id: "system-audit", name: "SYSTEM-AUDIT.md", type: "doc", description: "Environment audit", size: 14, color: "#43b581" },
+        { id: "security", name: "SECURITY.md", type: "doc", description: "Secrets management guidelines", size: 14, color: "#43b581" },
+        { id: "decision-log", name: "Decision-Log", type: "doc", description: "Strategic decisions record", size: 14, color: "#43b581" },
+
+        // OpenCode (level 1)
+        { id: "opencode", name: "OpenCode", type: "tool", description: "Primary execution agent — reads AGENTS.md, acts, writes back", size: 20, color: "#f86770" },
+
+        // AI Agents (level 2 - children of agents folder)
+        { id: "agent-research", name: "Research Agent", type: "agent", description: "Discovery and knowledge notes", size: 16, color: "#ff6b6b" },
+        { id: "agent-seo", name: "SEO Agent", type: "agent", description: "Keyword research, audits, briefs", size: 16, color: "#f7931c" },
+        { id: "agent-content", name: "Content Agent", type: "agent", description: "Blog, social, website copy", size: 16, color: "#00d4aa" },
+        { id: "agent-dev", name: "Developer Agent", type: "agent", description: "Websites, apps, APIs, code", size: 16, color: "#5e72e5" },
+        { id: "agent-marketing", name: "Marketing Agent", type: "agent", description: "Campaigns, positioning, personas", size: 16, color: "#8e52e5" },
+        { id: "agent-pm", name: "Project Manager Agent", type: "agent", description: "Planning, tasks, priorities", size: 16, color: "#43b581" },
+        { id: "agent-automation", name: "Automation Agent", type: "agent", description: "Scripts, workflows, integrations", size: 16, color: "#f86770" },
+
+        // Key Workflows (level 3)
+        { id: "workflow", name: "WORKFLOW.md", type: "doc", description: "Daily workflow steps", size: 14, color: "#43b581" },
+        { id: "ai-workflow", name: "AI-WORKFLOW.md", type: "doc", description: "OpenCode interaction patterns", size: 14, color: "#43b581" },
+        { id: "openocde-integration", name: "OPENCODE-INTEGRATION", type: "doc", description: "How OpenCode works with the vault", size: 14, color: "#43b581" },
+      ],
+      links: [
+        // User ↔ Obsidian
+        { source: "user", target: "obsidian", label: "reads/writes" },
+
+        // Obsidian ↔ Vault
+        { source: "obsidian", target: "vault", label: "opens" },
+        { source: "obsidian", target: "git", label: "tracks" },
+
+        // Vault → Directories
+        { source: "vault", target: "inbox", label: "contains" },
+        { source: "vault", target: "agency", label: "contains" },
+        { source: "vault", target: "clients", label: "contains" },
+        { source: "vault", target: "marketing", label: "contains" },
+        { source: "vault", target: "development", label: "contains" },
+        { source: "vault", target: "knowledge", label: "contains" },
+        { source: "vault", target: "projects", label: "contains" },
+        { source: "vault", target: "agents", label: "contains" },
+        { source: "vault", target: "tasks", label: "contains" },
+        { source: "vault", target: "meetings", label: "contains" },
+        { source: "vault", target: "resources", label: "contains" },
+        { source: "vault", target: "archive", label: "contains" },
+
+        // Vault → Root documents
+        { source: "vault", target: "agents-md", label: "contains" },
+        { source: "vault", target: "dashboard-md", label: "contains" },
+        { source: "vault", target: "system-map", label: "contains" },
+        { source: "vault", target: "system-audit", label: "contains" },
+        { source: "vault", target: "security", label: "contains" },
+        { source: "agency", target: "decision-log", label: "contains" },
+
+        // Obsidian ↔ OpenCode
+        { source: "obsidian", target: "opencode", label: "launches" },
+
+        // OpenCode ↔ AGENTS.md
+        { source: "opencode", target: "agents-md", label: "reads" },
+
+        // OpenCode ↔ All Agents
+        { source: "opencode", target: "agent-research", label: "dispatches" },
+        { source: "opencode", target: "agent-seo", label: "dispatches" },
+        { source: "opencode", target: "agent-content", label: "dispatches" },
+        { source: "opencode", target: "agent-dev", label: "dispatches" },
+        { source: "opencode", target: "agent-marketing", label: "dispatches" },
+        { source: "opencode", target: "agent-pm", label: "dispatches" },
+        { source: "opencode", target: "agent-automation", label: "dispatches" },
+
+        // Agents → Folders they use
+        { source: "agent-research", target: "knowledge", label: "writes to" },
+        { source: "agent-seo", target: "marketing", label: "writes to" },
+        { source: "agent-content", target: "marketing", label: "writes to" },
+        { source: "agent-dev", target: "development", label: "writes to" },
+        { source: "agent-marketing", target: "marketing", label: "writes to" },
+        { source: "agent-pm", target: "tasks", label: "writes to" },
+        { source: "agent-pm", target: "projects", label: "writes to" },
+        { source: "agent-automation", target: "development", label: "writes to" },
+
+        // Agent Registry
+        { source: "agents", target: "agent-registry", label: "contains", dynamic: true },
+        
+        // Documents → Workflows
+        { source: "agents-md", target: "workflow", label: "links" },
+        { source: "agents-md", target: "ai-workflow", label: "links" },
+        { source: "opencode", target: "openocde-integration", label: "documents" },
+        { source: "openocde-integration", target: "ai-workflow", label: "references" },
+      ]
+    };
+
+    // Add agent registry node
+    mindMapData.nodes.push({ id: "agent-registry", name: "Agent-Registry", type: "doc", description: "7 agent definitions and workspaces", size: 14, color: "#43b581" });
+
+    // D3 force simulation
+    const width = window.innerWidth;
+    const height = window.innerHeight - 64;
+
+    const svg = d3.select("#graph");
+
+    // Zoom behavior
+    const zoom = d3.zoom()
+      .scaleExtent([0.2, 4])
+      .on("zoom", (event) => {
+        g.attr("transform", event.transform);
+        const scale = event.transform.k;
+        d3.select("#zoom-level").text(Math.round(scale * 100) + "%");
+      });
+
+    svg.call(zoom);
+
+    const g = svg.append("g");
+
+    // Color scale based on node type
+    const typeColors = {
+      core: "#00d4aa",
+      tool: "#5e72e5",
+      data: "#f7931c",
+      folder: "#8e52e5",
+      doc: "#43b581",
+      agent: "#ff6b6b"
+    };
+
+    // Create simulation
+    const simulation = d3.forceSimulation(mindMapData.nodes)
+      .force("link", d3.forceLink(mindMapData.links)
+        .id(d => d.id)
+        .distance(d => 80 + (d.value || 1) * 30)
+        .strength(0.3)
+      )
+      .force("charge", d3.forceManyBody().strength(-200))
+      .force("center", d3.forceCenter(width / 2, height / 2))
+      .force("collide", d3.forceCollide().radius(d => d.size + 5))
+      .force("link.barnesHut", d3.forceManyBody().strength(-300).theta(0.5));
+
+    // Create links
+    const link = g.append("g")
+      .attr("class", "links")
+      .selectAll("path")
+      .data(mindMapData.links)
+      .enter()
+      .append("path")
+      .attr("class", "link")
+      .each(function(d) {
+        d._path = this;
+      });
+
+    // Link labels
+    const linkLabel = g.append("g")
+      .attr("class", "link-labels")
+      .selectAll("text")
+      .data(mindMapData.links)
+      .enter()
+      .append("text")
+      .attr("class", "link-label")
+      .text(d => d.label);
+
+    // Create nodes
+    const node = g.append("g")
+      .attr("class", "nodes")
+      .selectAll("g")
+      .data(mindMapData.nodes)
+      .enter()
+      .append("g")
+      .attr("class", "node")
+      .call(drag(simulation));
+
+    node.append("circle")
+      .attr("class", "nodecircle")
+      .attr("r", d => d.size)
+      .attr("fill", d => typeColors[d.type])
+      .attr("stroke", d => typeColors[d.type])
+      .attr("stroke-width", 2);
+
+    node.append("text")
+      .attr("class", "node-text")
+      .attr("dy", d => d.size + 18)
+      .attr("text-anchor", "middle")
+      .text(d => d.name);
+
+    // Legend
+    const legend = svg.append("g")
+      .attr("class", "legend")
+      .attr("transform", `translate(20, 20)`);
+
+    const legendData = [
+      { type: "core", label: "User", color: "#00d4aa" },
+      { type: "tool", label: "Tools", color: "#5e72e5" },
+      { type: "data", label: "Data", color: "#f7931c" },
+      { type: "folder", label: "Folders", color: "#8e52e5" },
+      { type: "doc", label: "Documents", color: "#43b581" },
+      { type: "agent", label: "AI Agents", color: "#ff6b6b" }
+    ];
+
+    const legendItems = legend.selectAll(".legend-item")
+      .data(legendData)
+      .enter()
+      .append("g")
+      .attr("class", "legend-item")
+      .attr("transform", (d, i) => `translate(0, ${i * 24})`);
+
+    legendItems.append("circle")
+      .attr("r", 6)
+      .attr("fill", d => d.color);
+
+    legendItems.append("text")
+      .attr("x", 12)
+      .attr("dy", 4)
+      .text(d => d.label)
+      .style("font-size", "11px");
+
+    // Simulation tick handler
+    simulation.on("tick", () => {
+      link
+        .attr("d", d => {
+          const node1 = node.filter(d => d.id === d.source.id || d.id === d.source);
+          const node2 = node.filter(d => d.id === d.target.id || d.id === d.target);
+          const x1 = d.source.x || 0;
+          const y1 = d.source.y || 0;
+          const x2 = d.target.x || 0;
+          const y2 = d.target.y || 0;
+          
+          return `M${x1},${y1} A 0,0 0 0,1 ${x2},${y2}`;
+        });
+
+      node.attr("transform", d => `translate(${d.x},${d.y})`);
+    });
+
+    // Drag functions
+    function drag(simulation) {
+      function dragstarted(event, d) {
+        if (!event.active) simulation.alphaTarget(0.3).restart();
+        d.fx = d.x;
+        d.fy = d.y;
+      }
+
+      function dragged(event, d) {
+        d.fx = event.x;
+        d.fy = event.y;
+      }
+
+      function dragended(event, d) {
+        if (!event.active) simulation.alphaTarget(0);
+        d.fx = null;
+        d.fy = null;
+      }
+
+      return d3.drag()
+        .on("start", dragstarted)
+        .on("drag", dragged)
+        .on("end", dragended);
+    }
+
+    // Click handler for nodes
+    node.on("click", (event, d) => {
+      const sidebar = document.getElementById("sidebar");
+      const sidebarContent = document.getElementById("sidebar-content");
+      
+      sidebarContent.innerHTML = `
+        <h2>${d.name}</h2>
+        <div class="content">
+          <p style="margin-bottom: 12px; color: var(--muted);">${d.description}</p>
+          <div>
+            ${d.type === "folder" ? `<a href="obsidian://open?vault=M-os&file=${d.id}" class="btn" style="display: inline-block; margin-bottom: 8px;">Open in Obsidian</a>` : ''}
+            ${d.type === "doc" ? `<a href="obsidian://open?vault=M-os&file=${d.id}" class="btn" style="display: inline-block; margin-bottom: 8px;">Open in Obsidian</a>` : ''}
+            ${d.size >= 16 && d.type === "agent" ? `<a href="obsidian://open?vault=M-os&file=07-AI-Agents/Agent-Registry/README" class="btn" style="display: inline-block; margin-bottom: 8px;">View Agent Registry</a>` : ''}
+            <div style="margin-top: 16px;">
+              <strong>Type:</strong> <span class="tag">${d.type}</span>
+              <strong>Size:</strong> ${d.size}
+            </div>
+          </div>
+        </div>
+      `;
+      
+      sidebar.classList.add("open");
+    });
+
+    // Click outside to close sidebar
+    document.querySelector(".graph-container").addEventListener("click", () => {
+      document.getElementById("sidebar").classList.remove("open");
+    });
+
+    // Prevent closing when clicking in sidebar
+    document.getElementById("sidebar").addEventListener("click", (e) => {
+      e.stopPropagation();
+    });
+
+    // Zoom controls
+    document.getElementById("zoom-in").addEventListener("click", () => {
+      svg.transition().duration(300).call(zoom.scaleBy, 1.3);
+    });
+
+    document.getElementById("zoom-out").addEventListener("click", () => {
+      svg.transition().duration(300).call(zoom.scaleBy, 0.7);
+    });
+
+    document.getElementById("reset-view").addEventListener("click", () => {
+      svg.transition().duration(500)
+        .call(zoom.transform, d3.zoomIdentity)
+        .on("end", () => {
+          simulation.alpha(0.3).restart();
+        });
+    });
+
+    document.getElementById("close-sidebar").addEventListener("click", () => {
+      document.getElementById("sidebar").classList.remove("open");
+    });
+  </script>
+</body>
+</html>

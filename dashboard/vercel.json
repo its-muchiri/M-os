@@ -6,6 +6,10 @@
       "dest": "/api/index.js"
     },
     {
+      "src": "/map",
+      "dest": "/map.html"
+    },
+    {
       "src": "/(.*)",
       "dest": "/index.html"
     }
