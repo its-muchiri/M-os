@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "Local-first dashboard for Muchiri-OS",
   "scripts": {
-    "dev": "node server.js",
-    "start": "node server.js"
+    "dev": "node api/index.js",
+    "start": "node api/index.js"
   },
   "dependencies": {},
   "devDependencies": {},
