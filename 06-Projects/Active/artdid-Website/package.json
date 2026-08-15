@@ -1,0 +1,13 @@
+{
+  "name": "artdid-website",
+  "version": "1.0.0",
+  "description": "--- type: project status: active created: 2026-08-14 updated: 2026-08-14 project:   name: artdid.co Website & Gallery Platform   client: \"[[02-Clients/Active/artdid.co|artdid.co]]\"   owner: Muchiri   start_date: 2026-08-14   deadline: 2026-09-14   technology: \"Next.js 18, TypeScript, Tailwind CSS, Sanity CMS, Vercel, Stripe\" tags:   - project   - website   - ecommerce   - arts ---",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}

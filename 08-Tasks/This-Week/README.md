@@ -8,20 +8,20 @@ week: "2026-W33 (Aug 11–17)"
 ## artdid.co Website — Sprint 1 (Aug 14–20)
 
 ### Sprint Goal
-Foundation complete: Sanity schemas approved, Next.js scaffold running, design system approved, kickoff call completed
+Foundation complete: Sanity schemas approved, Next.js scaffold running, design system approved, kickoff call completed, content templates defined.
 
-### Must Complete This Week
+### Must Complete This Week (Aug 14–20)
 
-#### Research & Strategy (Mon-Wed)
-- [ ] @research-agent: Competitor analysis — 5 top art gallery sites (Artsy, Saatchi, David Zwirner, Pace, Gagosian)
-- [ ] @research-agent: Sanity schema patterns for art catalogs (artist, artwork, exhibition, collection)
-- [ ] @seo-agent: SEO keyword brief — art/artist/collector/commercial keywords
-- [ ] @seo-agent: Competitor SEO audit for art gallery space
-- [ ] @content-agent: Content templates — artist bio, artwork description, exhibition copy, collector inquiry
-- [ ] @project-manager-agent: Sprint 1 detailed task breakdown & assignment
-- [ ] @project-manager-agent: Schedule & prepare for kickoff call (agenda, pre-read)
+#### Research & Strategy (Mon-Wed) ✅ COMPLETE
+- [x] @research-agent: Competitor analysis — 5 top art gallery sites (Artsy, Saatchi, David Zwirner, Pace, Gagosian)
+- [x] @research-agent: Sanity schema patterns for art catalogs (artist, artwork, exhibition, collection)
+- [x] @seo-agent: SEO keyword brief — art/artist/collector/commercial keywords
+- [x] @seo-agent: Competitor SEO audit for art gallery space
+- [x] @content-agent: Content templates — artist bio, artwork description, exhibition copy, collector inquiry
+- [x] @project-manager-agent: Sprint 1 detailed task breakdown & assignment
+- [x] @project-manager-agent: Schedule & prepare for kickoff call (agenda, pre-read)
 
-#### Foundation & CMS Setup (Wed-Fri)
+#### Foundation & CMS Setup (Wed-Fri) 🟡 IN PROGRESS
 - [ ] @developer-agent: Initialize Next.js 18 + TypeScript + Tailwind project
 - [ ] @developer-agent: Set up Sanity project with starter schemas (artist, artwork, exhibition, collection, page, settings)
 - [ ] @developer-agent: Configure Sanity Studio (desk structure, custom previews for artworks)
@@ -36,19 +36,18 @@ Foundation complete: Sanity schemas approved, Next.js scaffold running, design s
 ### Sprint 1 Deliverables (Due Aug 20)
 | Deliverable | Owner | Status |
 |-------------|-------|--------|
-| Competitor analysis report | Research Agent | Not Started |
-| Sanity schema design doc | Research + Dev | Not Started |
-| SEO keyword brief | SEO Agent | Not Started |
-| Content templates | Content Agent | Not Started |
-| Next.js + Sanity scaffold repo | Dev Agent | Not Started |
-| Design system v1 | Dev Agent | Not Started |
-| Sanity Studio configured | Dev Agent | Not Started |
-| Image optimization pipeline | Automation Agent | Not Started |
+| Competitor analysis report | Research Agent | ✅ Complete |
+| Sanity schema design doc | Research Agent | ✅ Complete |
+| SEO keyword brief | SEO Agent | ✅ Complete |
+| Content templates | Content Agent | ✅ Complete |
+| Next.js + Sanity scaffold repo | Dev Agent | 🟡 In Progress |
+| Design system v1 | Dev Agent | ⏳ Pending |
+| Sanity Studio configured | Dev Agent | ⏳ Pending |
+| Image optimization pipeline | Automation Agent | ⏳ Pending |
 
 ---
 
 ## Portfolio Website — Ongoing
-
 - [ ] @project-manager-agent: Task breakdown from requirements
 - [ ] @research-agent: Portfolio best practices research
 - [ ] @seo-agent: Portfolio SEO brief
@@ -56,7 +55,6 @@ Foundation complete: Sanity schemas approved, Next.js scaffold running, design s
 ---
 
 ## Internal / Operations
-
 - [ ] Review and update Decision Log with artdid project initiation
 - [ ] Verify OpenCode + Ollama integration working end-to-end
 - [ ] Test agent dispatch workflow
@@ -64,7 +62,6 @@ Foundation complete: Sanity schemas approved, Next.js scaffold running, design s
 ---
 
 ## Related
-
 - [[08-Tasks/Today/README|Today's Tasks]]
 - [[06-Projects/Active/artdid-Website/tasks|artdid Sprint Tasks]]
 - [[02-Clients/Active/artdid.co-Onboarding-Checklist|Onboarding Checklist]]

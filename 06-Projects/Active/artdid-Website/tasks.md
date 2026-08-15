@@ -2,7 +2,7 @@
 type: tasks
 project: "[[06-Projects/Active/artdid-Website|artdid.co Website & Gallery Platform]]"
 created: 2026-08-14
-updated: 2026-08-14
+updated: 2026-08-15
 status: in-progress
 ---
 
@@ -18,19 +18,19 @@ status: in-progress
 - [ ] @project-manager-agent: Document research findings in knowledge base
 
 ### In Progress
-- [ ] @project-manager-agent: Create detailed sprint breakdown from requirements (due today)
+- [ ] @project-manager-agent: Create detailed sprint breakdown from requirements (due: today Aug 15)
 
 ---
 
 ## Phase 2: Foundation & CMS Setup (Week 1-2 — Aug 14–27)
 
 ### To Start This Week
-- [ ] @developer-agent: Initialize Next.js 18 + TypeScript + Tailwind project scaffold
+- [ ] @developer-agent: Initialize Next.js 18 + TypeScript + Tailwind project scaffold — **in progress** (project initialized, node_modules installed: next@16.3.1, react, react-dom)
 - [ ] @developer-agent: Set up Sanity project with starter schemas (artists, artworks, exhibitions, collections, pages, settings)
 - [ ] @developer-agent: Configure Sanity Studio (desk structure: Artists > Artworks; Exhibitions > Artworks; Pages > Home/About/Contact)
 - [ ] @automation-agent: Set up image optimization pipeline (Sanity CDN + Next.js Image + blur placeholders + WebP/AVIF conversion)
 - [ ] @developer-agent: Implement design system foundation (color palette: neutral base + 2 accent colours; typography scale; spacing 4-system; base components: buttons, cards, modals, typography styles)
-- [ ] @developer-agent: Build layout components (Header with nav, Footer with links, Navigation mega-menu pattern)
+- [ ] @developer-agent: Build layout components (Header with nav, Footer with links, Navigation)
 
 ---
 
