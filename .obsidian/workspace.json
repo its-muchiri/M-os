@@ -4,17 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "ba43bf58611456d9",
+        "id": "19c79b51bf71dbd0",
         "type": "tabs",
         "children": [
           {
-            "id": "fb51228dc9d432ca",
+            "id": "10a9a5a1a707c718",
             "type": "leaf",
             "state": {
-              "type": "graph",
-              "state": {},
-              "icon": "lucide-git-fork",
-              "title": "Graph view"
+              "type": "markdown",
+              "state": {
+                "file": "07-AI-Agents/Agent-Registry/README.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "README"
             }
           }
         ]
@@ -95,6 +99,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "07-AI-Agents/Agent-Registry/README.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -113,6 +118,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "07-AI-Agents/Agent-Registry/README.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
@@ -155,6 +161,7 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "07-AI-Agents/Agent-Registry/README.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -181,19 +188,27 @@
       "bases:Create new base": false
     }
   },
-  "active": "fb51228dc9d432ca",
+  "active": "628526010ce8bf75",
   "lastOpenFiles": [
-    "06-Projects/Active/artdid-Website/node_modules/@next/swc-win32-x64-msvc/next-swc.win32-x64-msvc.node",
-    "06-Projects/Active/artdid-Website/node_modules/next/dist/esm/server/api-utils/web.js",
-    "06-Projects/Active/artdid-Website/node_modules/next/web-vitals.js",
-    "06-Projects/Active/artdid-Website/node_modules/next/dist/esm/client/web-vitals.js",
-    "06-Projects/Active/artdid-Website/node_modules/next/dist/compiled/web-vitals/web-vitals.js",
-    "06-Projects/Active/artdid-Website/node_modules/next/dist/client/web-vitals.js",
-    "06-Projects/Active/artdid-Website/node_modules/next/dist/compiled/web-vitals-attribution/web-vitals.attribution.js",
-    "06-Projects/Active/artdid-Website/node_modules/next/dist/esm/client/dev/hot-reloader/app/web-socket.js",
-    "06-Projects/Active/artdid-Website/node_modules/next/dist/client/dev/hot-reloader/app/web-socket.js",
-    "06-Projects/Active/artdid-Website/node_modules/next/dist/server/web/web-on-close.js",
-    "06-Projects/Active/artdid-Website/node_modules/next/dist/esm/server/web/web-on-close.js",
+    "06-Projects/Active/artdid-website/sanity.config.ts",
+    "06-Projects/Active/artdid-website/schemas/settings.js",
+    "06-Projects/Active/artdid-website/schemas/pages.js",
+    "06-Projects/Active/artdid-website/schemas/exhibition.js",
+    "06-Projects/Active/artdid-website/schemas/artwork.js",
+    "06-Projects/Active/artdid-website/schemas/artist.js",
+    "06-Projects/Active/artdid-website/schemas",
+    "06-Projects/Active/artdid-website/sanity.json",
+    "06-Projects/Active/artdid-website/node_modules/object.fromentries/node_modules/es-abstract/2023/Number/subtract.js",
+    "06-Projects/Active/artdid-website/node_modules/object.fromentries/node_modules/es-abstract/2023/Number/signedRightShift.js",
+    "06-Projects/Active/artdid-website/node_modules/object.fromentries/node_modules/es-abstract/2023/Number/sameValueZero.js",
+    "06-Projects/Active/artdid-website/node_modules/baseline-browser-mapping/README.md",
+    "06-Projects/Active/artdid-website/tasks.md",
+    "06-Projects/Active/artdid-website/public/window.svg",
+    "06-Projects/Active/artdid-website/public/vercel.svg",
+    "06-Projects/Active/artdid-website/public/next.svg",
+    "06-Projects/Active/artdid-website/public/globe.svg",
+    "06-Projects/Active/artdid-website/public/file.svg",
+    "02-Clients/Active/artdid.co.md",
     "06-Projects/Active/artdid-Website/content-templates.md"
   ]
 }

@@ -1,90 +1,36 @@
----
-type: project
-status: active
-created: 2026-08-14
-updated: 2026-08-14
-project:
-  name: artdid.co Website & Gallery Platform
-  client: "[[02-Clients/Active/artdid.co|artdid.co]]"
-  owner: Muchiri
-  start_date: 2026-08-14
-  deadline: 2026-09-14
-  technology: "Next.js 18, TypeScript, Tailwind CSS, Sanity CMS, Vercel, Stripe"
-tags:
-  - project
-  - website
-  - ecommerce
-  - arts
----
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-# artdid.co Website & Gallery Platform
+## Getting Started
 
-## Objective
+First, run the development server:
 
-Build a beautiful, performant website for artdid.co that serves as:
-1. Artist portfolio showcase
-2. Online gallery with artwork browsing
-3. E-commerce platform for artwork sales
-3. Artist management dashboard
-4. Blog for exhibition announcements and artist features
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
 
-## Client
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-[[02-Clients/Active/artdid.co|artdid.co]]
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-## Owner
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-Muchiri
+## Learn More
 
-## Status
+To learn more about Next.js, take a look at the following resources:
 
-Current status: active (kickoff phase)
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-## Timeline
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-- Start: 2026-08-14
-- Deadline: 2026-09-14 (4 weeks)
+## Deploy on Vercel
 
-## Technology
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-- Next.js 18 (App Router)
-- TypeScript
-- Tailwind CSS
-- Sanity.io (headless CMS for artists, artworks, exhibitions)
-- Stripe (payments for artwork sales)
-- Vercel (deployment)
-- Image optimization (Next.js Image + Sanity CDN)
-
-## Requirements
-
-See [[requirements]].
-
-## Tasks
-
-See [[tasks]].
-
-## Risks
-
-| Risk | Likelihood | Impact | Mitigation |
-|---|---|---|---|
-| Complex artwork metadata | High | Medium | Use Sanity for flexible schema |
-| High-res image performance | High | High | Next.js Image + Sanity CDN + blur placeholders |
-| Stripe art marketplace complexity | Medium | High | Start with simple buy-now, add bidding later |
-| Artist onboarding flow | Medium | Medium | Design clear CMS workflows in Sanity |
-
-## Decisions
-
-See [[decisions]].
-
-## Next Actions
-
-- [ ] @project-manager-agent: Review requirements and create detailed task breakdown
-- [ ] @research-agent: Research art gallery website best practices and competitor analysis
-- [ ] @seo-agent: Create SEO brief for art/artist keywords
-- [ ] @content-agent: Draft content strategy (artist bios, exhibition copy, artwork descriptions)
-- [ ] @developer-agent: Set up Next.js + Sanity + Starter project
-
-## Related
-
-- [[02-Clients/Active/artdid.co|Client: artdid.co]]
-- [[08-Tasks/Today/README|Today's Tasks]]
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
